@@ -1,0 +1,76 @@
+ <% layout("/layouts/boilerplate") %>
+<br>
+ <div class="row mt-3">
+ <div class="col-8 offset-2" >
+    <h3>Create a New Listing</h3>
+    <br>
+      
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+
+      <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input name="listing[title]" placeholder="Add a Catchy Title" type="text" class="form-control" required/>
+      <div class="valid-feedback">
+      Title Looks good!
+    </div>
+      </div>
+    
+      <!-- listing[description]-> key value pair hai ye ...aise he agay bhi kiya gaya hai -->
+       <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+      <textarea
+        name="listing[description]"  
+        placeholder="enter description"
+        class="form-control"
+        required
+      ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Listing Image</label>
+      <input
+        name="listing[image]"
+        placeholder="enter image URL/Link"
+        type="file"
+        class="form-control"
+        required
+      />
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+         <label for="price" class="form-label">Price</label>
+      <input name="listing[price]" placeholder="1200"  class="form-control" required/>
+      </div>
+
+      <div class="mb-3 col-md-8">
+        <label for="country" class="form-label">Country</label>
+      <input name="listing[country]" placeholder="India" type="text" class="form-control" required />
+      </div>
+      </div>
+
+      
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+      <input
+        name="listing[location]"
+        placeholder="Prayagraj, Uttar Pradesh"
+        type="text"
+        class="form-control"
+      />
+      </div>
+
+      <br />
+      <button class="btn btn-dark add-btn mt-3">Add</button>
+    </form>
+    </div>
+  </div>
+
+<!-- ye jo form- control hai ye sb bootstrap ki classes hai jisse styling add ho rhe hai -->
+
+<!-- line no. 8 mei validation laga hai jisme novalidate and class="needs-validation" add kiye hai 
+ bootstrap ki website mei validation me jakr code copy kre hai jisko hmne js folder mei script.js mei paste kra 
+ hai aur phir uske location ko script tag se boilerplate.js mei paste krdiye hai 
+ isse hmne validation in forms ko seekha 
+ same cheez edit.ejs vale form mei kiye hai -->
