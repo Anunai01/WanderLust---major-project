@@ -10,35 +10,26 @@ module.exports.index=async (req,res)=>{
    res.render("listings/index.ejs", {allListings});
 };
 
-module.exports.createListing= async (req, res,next) => {
-  const response= await geocodingClient.forwardGeocode({
-  query: req.body.listing.location,
-  limit: 1
-})
-  .send();
+module.exports.createListing = async (req, res, next) => {
+  const response = await geocodingClient
+    .forwardGeocode({
+      query: req.body.listing.location,
+      limit: 1,
+    })
+    .send();
 
-
-  let url= req.file.path;
+  let url = req.file.path;
   let filename = req.file.filename;
-  // if(!result.error){
-  //   throw new ExpressError(400, result.err)
-  // } validateListing use kr rhe hai toh if condtion ki zarurat nhi hai ab
-  const newListing = new Listing(req.body.listing);
-  newListing.owner=req.user._id;
-  newListing.image={url, filename};
-  newListing.geometry = response.body.features[0].geometry;
-  let savedListing=await newListing.save();
-  console.log(savedListing);
-  req.flash("success" , "Listing created successfully !");
-  res.redirect("/listings");
-//   console.log("coordinates:", coordinates);
-// console.log("Array?", Array.isArray(coordinates));
-// console.log("mapbox supported:", mapboxgl.supported());
-// console.log("map div:", document.getElementById("map"));
-  req.flash("success", "Listing created successfully!");
-  return res.redirect("/listings");
 
-  
+  const newListing = new Listing(req.body.listing);
+  newListing.owner = req.user._id;
+  newListing.image = { url, filename };
+  newListing.geometry = response.body.features[0].geometry;
+
+  await newListing.save();
+
+  req.flash("success", "Listing created successfully!");
+  return res.redirect("/listings"); // ✅ ONLY ONE RESPONSE
 };
 
 module.exports.showListing=async (req, res) => {
